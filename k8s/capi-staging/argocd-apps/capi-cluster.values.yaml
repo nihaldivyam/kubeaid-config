@@ -18,7 +18,7 @@ provider:
 
 aws:
   secretName: cloud-credentials
-  sshKeyName: capi-staging
+  sshKeyName: CapiStaging
   region: eu-west-1
   bastion:
     enabled: true
