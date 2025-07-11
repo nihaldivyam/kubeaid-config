@@ -1,0 +1,90 @@
+apiVersion: kubeone.k8c.io/v1beta2
+kind: KubeOneCluster
+
+name: KDS-kubeaid-test
+
+cloudProvider:
+  none: {}
+
+versions:
+  kubernetes: v1.31.0
+
+apiEndpoint: 
+  host: 172.17.4.71
+  port: 6443
+
+controlPlane:
+  hosts:
+    - sshPort: 22
+      sshUsername: root
+      privateAddress: 172.17.4.71
+
+clusterNetwork:
+  podSubnet: "10.244.0.0/16"
+  serviceSubnet: "10.96.0.0/12"
+  cni:
+    external: {}
+  kubeProxy:
+    skipInstallation: true
+
+machineController:
+  deploy: false
+
+operatingSystemManager:
+  deploy: false
+
+staticWorkers:
+  hosts:
+    - sshPort: 22
+      sshUsername: root
+      privateAddress: 172.17.4.71
+
+      labels: 
+        node-role.kubernetes.io/bootstrapper: KDS-kubeaid-test
+        node.cluster.x-k8s.io/nodegroup: bootstrapper
+      taints: 
+        []
+    - sshPort: 22
+      sshUsername: root
+      privateAddress: 172.17.4.72
+
+      labels: 
+        node-role.kubernetes.io/bootstrapper: KDS-kubeaid-test
+        node.cluster.x-k8s.io/nodegroup: bootstrapper
+      taints: 
+        []
+    - sshPort: 22
+      sshUsername: root
+      privateAddress: 172.17.4.73
+
+      labels: 
+        node-role.kubernetes.io/bootstrapper: KDS-kubeaid-test
+        node.cluster.x-k8s.io/nodegroup: bootstrapper
+      taints: 
+        []
+    - sshPort: 22
+      sshUsername: root
+      privateAddress: 172.17.4.74
+
+      labels: 
+        node-role.kubernetes.io/bootstrapper: KDS-kubeaid-test
+        node.cluster.x-k8s.io/nodegroup: bootstrapper
+      taints: 
+        []
+
+dynamicWorkers: []
+
+helmReleases:
+  - repoURL: https://helm.cilium.io/
+    chart: cilium
+    version: 1.17.5
+    releaseName: cilium
+    namespace: cilium
+    wait: true
+    values:
+      - inline:
+          operator:
+            replicas: 1
+          kubeProxyReplacement: "true"
+          k8sServiceHost: 172.17.4.71
+          k8sServicePort: 6443
