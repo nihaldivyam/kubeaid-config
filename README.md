@@ -1,4 +1,18 @@
-# k8id-config
+# KubeAid-config
+
+A template for your own KubeAid instance configuration
+
+# /k8s - you see managed Kubernetes clusters
+
+## example. https://github.com/Obmondo/kubeaid-config/tree/main/k8s/test.cluster.com
+
+name of the cluster: test.cluster.com
+
+and runs these services: https://github.com/Obmondo/kubeaid-config/tree/main/k8s/test.cluster.com/argocd-apps/templates
+and uses these values (settings) for those services: https://github.com/Obmondo/kubeaid-config/tree/main/k8s/test.cluster.com/argocd-apps
+and here is the config used with kubeaid-cli to spinup/recover cluster https://github.com/Obmondo/kubeaid-config/tree/main/k8s/test.cluster.com - called kubeaid-bootstrap-general.yaml
+
+Documentation for each service - can be found in its corresponding folder. Natively supported apps live in https://github.com/Obmondo/kubeaid/tree/master/argocd-helm-charts   and you can f.ex. read docs specificly for cloudnative-pg (we use for managing postgresql instances) - here: https://github.com/Obmondo/kubeaid/tree/master/argocd-helm-charts/cloudnative-pg
 
 
 ## Kube Prometheus Mixins
