@@ -1,1 +1,5 @@
 ---
+cilium:
+  kubeProxyReplacement: "true"
+  k8sServiceHost: test-az1-control-plane-9l2r13w4.hcp.northeurope.azmk8s.io
+  k8sServicePort: 443
