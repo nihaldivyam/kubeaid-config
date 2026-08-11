@@ -1,0 +1,47 @@
+global:
+  clusterName: test-az1
+  kubernetes:
+    version: v1.35.7
+  kubeaid:
+    repo: https://github.com/Obmondo/KubeAid.git
+    # Pinned for the in-node `git clone` in postKubeadmCommands. Keeps
+    # Cilium / CCM installs on the control-plane on the same chart
+    # snapshot kubeaid-cli rendered locally, instead of letting them
+    # drift to whatever the fork's default branch happens to be at
+    # node bootstrap time.
+    version: 32.1.0
+  kubeaidConfig:
+    repo: git@github.com:nihaldivyam/kubeaid-config.git
+  additionalUsers:
+    []
+provider:
+  azure: true
+
+azure:
+  # Azure managed (AKS) control plane : the chart renders AzureManagedControlPlane
+  # + AzureManagedCluster + one AzureManagedMachinePool per node-group instead of
+  # AzureCluster + KubeadmControlPlane + MachineDeployments. Azure owns the
+  # control plane, node images and agent-pool autoscaling — hence no
+  # sshPublicKey, canonicalUbuntuImage or controlPlane block here. CAPZ
+  # authenticates with the AAD service principal : an AzureClusterIdentity of
+  # type ServicePrincipal referencing the clientSecret key of the
+  # cloud-credentials Secret.
+  aks: true
+  tenantID: 7c6459a6-ad9d-4c5c-ba18-e2a3979385a0
+  subscriptionID: bd59662e-a78e-4d7c-84f6-9d9ad1883726
+  location: westeurope
+  resourceGroup: test-az1
+
+  clientID: 2d1794ef-29ba-4d23-8fe1-ae587efa093a
+  secretName: cloud-credentials
+
+  nodeGroups:
+    - name: default
+      labels: {}
+      taints: []
+      cpu: 4
+      memory: 8
+      minSize: 3
+      maxSize: 6
+      vmSize: Standard_F4s_v2
+      diskSizeGB: 128
