@@ -29,7 +29,7 @@ azure:
   aks: true
   tenantID: 7c6459a6-ad9d-4c5c-ba18-e2a3979385a0
   subscriptionID: bd59662e-a78e-4d7c-84f6-9d9ad1883726
-  location: westeurope
+  location: NorthEurope
   resourceGroup: test-az1
 
   clientID: 2d1794ef-29ba-4d23-8fe1-ae587efa093a

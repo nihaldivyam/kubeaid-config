@@ -32,7 +32,7 @@ cloud:
   azure:
     tenantID: 7c6459a6-ad9d-4c5c-ba18-e2a3979385a0
     subscriptionID: bd59662e-a78e-4d7c-84f6-9d9ad1883726
-    location: westeurope
+    location: NorthEurope
     aks: true
     # The first node-group becomes the AKS System agent pool; AKS's built-in
     # cluster autoscaler scales each pool between minSize and maxSize.
