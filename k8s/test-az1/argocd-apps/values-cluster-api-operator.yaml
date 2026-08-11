@@ -1,0 +1,15 @@
+---
+cluster-api-operator:
+
+  core:
+    cluster-api:
+      namespace: capi-cluster
+      createNamespace: false
+  bootstrap:
+    kubeadm:
+      namespace: capi-cluster
+      createNamespace: false
+  controlPlane:
+    kubeadm:
+      namespace: capi-cluster
+      createNamespace: false
